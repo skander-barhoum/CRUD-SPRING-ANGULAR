@@ -1,0 +1,109 @@
+<div class="row">
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">Add new Book</button>
+        <br><br>
+        <ng-template #mymodal1 let-modal1>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title" >Add new Book</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+                    <span aria-hidden="true" (click)="cancel()">×</span>
+                </button>
+
+            </div>
+            <div class="center">
+            <form>
+                <div class="row" class="col-md-6">
+                    <input type="text" placeholder="Book Name" [(ngModel)]="book.title"
+                        [ngModelOptions]="{standalone : true}">
+                </div>
+                <div class="row" class="col-md-6">
+                    <input type="number" placeholder="Nombre de page" [(ngModel)]="book.nbPage"
+                        [ngModelOptions]="{standalone : true}">
+                </div>
+                <div class="row" class="col-md-6">
+                    <input type="number" placeholder="Price" [(ngModel)]="book.price"
+                        [ngModelOptions]="{standalone : true}">
+                </div>
+              
+                <div class="row" class="col-md-6">
+                    <input type="number" placeholder="Quantity" [(ngModel)]="book.quantity"
+                        [ngModelOptions]="{standalone : true}">
+                </div>
+                <br>
+                <button type="button" class="btn btn-success" (click)="addBook(book)" (click)="modal1.close('Save click')">Add</button> 
+                <button type="button" class="btn btn-info" (click)="modal1.close('Save click')" >Cancel</button>
+            </form>
+        </div>
+        </ng-template>
+        <div class="row">
+            <div class="card" class="text-center">
+                <table class="table">
+                    <thead style="background-color: rgb(192, 183, 183);">
+                        <th>Name</th>
+                        <th>Nombre de Page</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let book of listBooks'>
+                            <td>{{book.title}}</td>
+                            <td>{{book.nbPage}}</td>
+                            <td>{{book.price}}</td>
+                            <td>{{book.quantity}}</td>
+                            <td><button type="button" class="btn btn-outline-primary"
+                                    (click)="open(mymodal)">edit</button>
+                                <ng-template #mymodal let-modal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+                                        <button type="button" class="close" aria-label="Close"
+                                            (click)="modal.dismiss('Cross click')">
+                                            <span aria-hidden="true" (click)="cancel()">×</span>
+
+                                        </button>
+
+                                    </div>
+                                    <div>
+                                    <form>
+                                        <div class="modal-body">
+
+                                            <div class="row" class="col-md-5">
+                                                <label>Title</label>
+                                                <input type="text" [(ngModel)]="book.title" [ngModelOptions]="{standalone : true}" />
+                                            </div>
+                                            <div class="row" class="col-md-5">
+                                                <label>Nombre page</label>
+                                                <input type="number" [(ngModel)]="book.nbPage" [ngModelOptions]="{standalone : true}" />
+                                            </div>
+                                            <div class="row" class="col-md-5">
+                                                <label>Price</label>
+                                                <input type="number" [(ngModel)]="book.price" [ngModelOptions]="{standalone : true}" />
+                                            </div>
+                                           
+                                            <div class="row" class="col-md-5">
+                                                <label>Quantity</label>
+                                                <input type="number" [(ngModel)]="book.quantity" [ngModelOptions]="{standalone : true}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+
+                                            <button type="button" class="btn btn-info"
+                                                (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
+                                            <button class="btn btn-success"(click)="editBook(book)" (click)="modal.close('Save click')">Validate</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                </ng-template>
+                                <button type="button" class="btn btn-outline-danger"
+                                    (click)="deleteBook(book.id_book)">delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
